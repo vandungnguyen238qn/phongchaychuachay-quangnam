@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống kê tình hình cháy nổ Quảng Nam</title>
+    <!-- Favicon -->
+    <link href="resources/favicon/favicon.ico" rel="icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f0f8ff; /* Màu nền nhẹ nhàng */
+            font-family: Arial, sans-serif; /* Phông chữ dễ đọc */
+        }
+
+        .title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 10px;
+            background-color: #e6f7ff; /* Nền tiêu đề */
+            border-radius: 10px; /* Góc bo tròn */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        }
+
+        .chart-container {
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* Nền trắng cho biểu đồ */
+            border-radius: 10px; /* Góc bo tròn */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        }
+
+        .pie-charts-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            flex-wrap: wrap; /* Đảm bảo biểu đồ nằm gọn trên các thiết bị nhỏ */
+        }
+
+        .pie-chart {
+            width: 150px; /* Kích thước nhỏ hơn */
+            height: 150px; /* Kích thước nhỏ hơn */
+            margin: 10px;
+            background-color: #ffffff; /* Nền trắng cho biểu đồ tròn */
+            border-radius: 10px; /* Góc bo tròn */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        }
+
+        .pie-title {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555; /* Màu chữ tiêu đề nhỏ */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Phần tiêu đề -->
+<!--    <div class="title">
+        Tình hình cháy, nổ trên địa bàn tỉnh Quảng Nam
+    </div>-->
+
+    <div class="chart-container">
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <!-- Bố cục biểu đồ tròn bên dưới biểu đồ cột -->
+    <div class="pie-charts-container">
+        <div>
+            <canvas id="pieChart2020" class="pie-chart"></canvas>
+            <div class="pie-title">2020</div>
+        </div>
+        <div>
+            <canvas id="pieChart2021" class="pie-chart"></canvas>
+            <div class="pie-title">2021</div>
+        </div>
+        <div>
+            <canvas id="pieChart2022" class="pie-chart"></canvas>
+            <div class="pie-title">2022</div>
+        </div>
+        <div>
+            <canvas id="pieChart2023" class="pie-chart"></canvas>
+            <div class="pie-title">2023</div>
+        </div>
+        <div>
+            <canvas id="pieChart2024" class="pie-chart"></canvas>
+            <div class="pie-title">2024 (tính đến tháng 9)</div>
+        </div>
+    </div>
+
+    <script>
+        // Biểu đồ cột
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024 (tính đến tháng 9)'],
+                datasets: [{
+                    label: 'Số vụ cháy',
+                    data: [70, 45, 18, 55, 58],
+                    backgroundColor: 'red'
+                }, {
+                    label: 'Thiệt hại tài sản (tỉ đồng)',
+                    data: [30.2, 9.3, 3.6, 19, 7.5],
+                    backgroundColor: 'green'
+                }, {
+                    label: 'Số người chết',
+                    data: [4, 2, 0, 4, 1],
+                    backgroundColor: 'yellow'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Hàm tạo biểu đồ tròn
+        function createPieChart(ctx, data, labels, title) {
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ['red', 'blue', 'yellow', 'orange', 'gray']
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title
+                        }
+                    }
+                }
+            });
+        }
+
+        // Dữ liệu cho các biểu đồ tròn
+        const pieData2020 = [1, 1, 1, 1, 1];
+        const pieData2021 = [1, 1, 1, 1, 1];
+        const pieData2022 = [1, 1, 1, 1, 1];
+        const pieData2023 = [1, 1, 1, 1, 1];
+        const pieData2024 = [1, 1, 1, 1, 1];
+
+        const pieLabels = ['Do sự cố điện', 'Do sơ suất bất cẩn', 'Do thiên tai', 'Do phá hại', 'Chưa rõ nguyên nhân'];
+
+        // Tạo biểu đồ tròn
+        createPieChart(document.getElementById('pieChart2020').getContext('2d'), pieData2020, pieLabels, 'Nguyên nhân cháy năm 2020');
+        createPieChart(document.getElementById('pieChart2021').getContext('2d'), pieData2021, pieLabels, 'Nguyên nhân cháy năm 2021');
+        createPieChart(document.getElementById('pieChart2022').getContext('2d'), pieData2022, pieLabels, 'Nguyên nhân cháy năm 2022');
+        createPieChart(document.getElementById('pieChart2023').getContext('2d'), pieData2023, pieLabels, 'Nguyên nhân cháy năm 2023');
+        createPieChart(document.getElementById('pieChart2024').getContext('2d'), pieData2024, pieLabels, 'Nguyên nhân cháy năm 2024');
+    </script>
+</body>
+
+</html>
