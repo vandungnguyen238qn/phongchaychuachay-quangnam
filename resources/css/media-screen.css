@@ -1,0 +1,22 @@
+/*Hien thi kich thuoc chu cho the h1 , li thay doi khi man hinh to hon*/
+
+
+/* Nếu màn hình to hơn 1024 px */
+@media screen and (min-width: 1024px) {
+    h1 {
+        font-size: 35px; 
+    }
+    li, span{
+        font-size: 25px; 
+    }
+}
+/* Nếu màn hình to hơn 1920 px */
+@media screen and (min-width: 1920px) {
+    h1 {
+        font-size: 40px; 
+    }
+    li, span{
+        font-size: 30px; 
+    }
+}
+
