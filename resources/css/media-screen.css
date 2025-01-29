@@ -9,6 +9,9 @@
     li, span{
         font-size: 25px; 
     }
+    b i{
+        font-size: 25px;
+    }
 }
 /* Nếu màn hình to hơn 1920 px */
 @media screen and (min-width: 1920px) {
@@ -17,6 +20,9 @@
     }
     li, span{
         font-size: 30px; 
+    }
+    b i{
+        font-size: 25px;
     }
 }
 
